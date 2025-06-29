@@ -5,14 +5,14 @@ export function Contact(props){
     
     const links=[
         {   
-            img:"/images/github-mark.png"
+            img:""
             ,link:"https://github.com/Unnamedhat88",
             title:"Github",
             color:"lightgray"
         
         },
         {
-            img:"/images/LI-In-Bug.png"
+            img:""
             ,link:"https://www.linkedin.com/in/brandon-pratama-kwee-354576302/",
             title:"LinkedIn",
             color:"#7092ff"

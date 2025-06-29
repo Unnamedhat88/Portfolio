@@ -37,7 +37,6 @@ function App() {
   const [Y, setY]=useState(0);
 
   const [scrollprogress,setScrollProgress]=useState(0)
-  console.log(scrollprogress)
 
   const handleScroll=()=>{
     const position=window.pageYOffset;
