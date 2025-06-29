@@ -28,7 +28,7 @@ export function Projects(props){
         return(
         <div className="grid my-4 bg-red-100 rounded-xl" style={{marginInline:"20px",height: '550px' }}>
             <div className="flex py-10 px-10">
-            <img src={ProjectsData[props.X].img} className="object-cover" style={{width:"500px", height:"350px"}}></img>
+            <img src={`${import.meta.env.BASE_URL}${ProjectsData[props.X].img.replace('./', '')}`} className="object-cover" style={{width:"500px", height:"350px"}}></img>
                 <div className=" ml-5 flex-1 flex flex-col justify-between ">
                     <div>
                         <p className="mx-6 text-5xl font-bold">{ProjectsData[props.X].title}</p>
