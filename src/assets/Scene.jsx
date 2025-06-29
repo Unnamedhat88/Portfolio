@@ -10,6 +10,7 @@ import Object from "./Object";
 
 
 export default function Scene() {
+  
 
   const Light = () => {
     const dirLight = useRef(null);
@@ -41,20 +42,16 @@ export default function Scene() {
   
   
   return (<>
-    <Stats></Stats>
+
     {/* <Light></Light> */}
     <ambientLight intensity={1.0}></ambientLight>
 
-    <mesh ref={plane} rotation={[-1.3,0,0]} position={[0,1,0]} castShadow receiveShadow>
+    {/* <mesh ref={plane} rotation={[-1.3,0,0]} position={[0,1,0]} castShadow receiveShadow>
       <planeGeometry args={[4,4,30,30]}/>
       <shaderMaterial fragmentShader={Fragmentwater} vertexShader={Vertexwater} uniforms={uniforms.current} transparent />
-    </mesh>
+    </mesh> */}
 
-    <mesh>
-      <torusGeometry>
-      </torusGeometry>
-      <meshPhongMaterial></meshPhongMaterial>
-    </mesh>
+    
 
     <Object></Object>
 
