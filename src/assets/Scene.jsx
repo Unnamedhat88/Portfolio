@@ -22,7 +22,7 @@ export default function Scene() {
 
 
   
-  const texture=useTexture("Portfolio/images/R.png");
+  const texture=useTexture("./images/R.png");
 
 
     const plane=useRef();
