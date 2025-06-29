@@ -6,7 +6,7 @@ export function Certs(props){
     const CertsData=[
         {title:"AWS Certified AI Practioner", 
             desc:`Learned the foundational knowledge of using Amazon's AI services such as Rekognition, Polly, Amazon Q.
-             I also learned some foundational AI knowledge such as bias and variance, and retrieval-=augmented learning(RAG).`
+             I also learned some foundational AI knowledge such as bias and variance, and retrieval-augmented learning(RAG).`
             , img:"./images/cert1AwsHD.png"
             ,link:"https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url"
             },
