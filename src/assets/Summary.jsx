@@ -8,7 +8,7 @@ export function Summary(props){
                 <div className="relative z-20 mx-4 my-4">
                     <div className="flex mx-4">
                         <div className="text-5xl pt-6" style={{fontWeight:"600",letterSpacing:"-1px"}}>{Text[lang].greeting}</div>
-                        <img className="ml-auto pt-4 cursor-pointer" src={`${import.meta.env.BASE_URL}images/aws-certified-ai-practitioner.png`} style={{width:"100px"}} onClick={()=>window.open("https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url","_blank")}></img>
+                        <img className="ml-auto pt-4 cursor-pointer" src="https://unnamedhat88.github.io/Portfolio/images/aws-certified-ai-practitioner.png" style={{width:"100px"}} onClick={()=>window.open("https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url","_blank")}></img>
                     </div>
                     <div className="mt-10 mx-16 text-2xl semi-bold">
                     <div className="font-medium">{Text[lang].summary}</div>
