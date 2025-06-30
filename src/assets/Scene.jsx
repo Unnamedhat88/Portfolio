@@ -22,7 +22,8 @@ export default function Scene() {
 
 
   
-  const texture=useTexture("./images/R.png");
+  const texture = useTexture(`${import.meta.env.BASE_URL}images/R.png`);
+
 
 
     const plane=useRef();

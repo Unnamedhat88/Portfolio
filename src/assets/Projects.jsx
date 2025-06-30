@@ -9,7 +9,7 @@ export function Projects(props){
                 this project aims to help people with pollen allergies by showing highly 
                 pollenous areas. The full stack was built using React for the front end, Python Flask for the backend, and SQLAlchemy 
                 for the database. We also implemented a model to classify the flower with a 0.86 accuracy`
-            , img:"./images/proj1.png"
+            , img:"proj1.png"
             , tech:"Technology used : Keras, Python, React, Flask, SQLAlchemy, Tailwind CSS"
             ,prototypeLink:"NA"
             , GithubLink:"NA"},
@@ -18,7 +18,7 @@ export function Projects(props){
          desc: `I created a portfolio website that has all my introductions, projects, certificates, and ways
         to contact me. I achieved this by using R3F (React three fiber) for the 3D background and React. I also
         learned GLSL for the water caustic. For the model, I created it in Blender.`
-         , img:"./images/proj2.png"
+         , img:"proj2.png"
          , tech:"Technology used : React, R3F, GLSL, Blender, Tailwind CSS"
          ,prototypeLink:"NA"
          , GithubLink:"NA"},
@@ -28,7 +28,7 @@ export function Projects(props){
         return(
         <div className="grid my-4 bg-red-100 rounded-xl" style={{marginInline:"20px",height: '550px' }}>
             <div className="flex py-10 px-10">
-            <img src={ProjectsData[props.X].img} className="object-cover" style={{width:"500px", height:"350px"}}></img>
+            <img src={`${import.meta.env.BASE_URL}images/${ProjectsData[props.X].img}`} className="object-cover" style={{width:"500px", height:"350px"}}></img>
                 <div className=" ml-5 flex-1 flex flex-col justify-between ">
                     <div>
                         <p className="mx-6 text-5xl font-bold">{ProjectsData[props.X].title}</p>

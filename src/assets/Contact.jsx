@@ -20,9 +20,9 @@ export function Contact(props){
         },
         {
             img:""
-            ,link:"https://outlook.office.com/mail/deeplink/compose?to=is0805fh@ed.ritsumei.ac.jp",
-            title:"Outlook",
-            color:"#b3e4ff"
+            ,link:"mailto:brandon.portfolio88@gmail.com",
+            title:"Gmail",
+            color:"red"
       
         },
             
