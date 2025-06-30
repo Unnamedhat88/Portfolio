@@ -32,55 +32,43 @@ function CameraAdjust({scrollprogress}){
   },[positionofxz])
 }
 
-// function App() {
-//   const [X, setX]=useState(0);
-//   const [Y, setY]=useState(0);
+function App() {
+  const [X, setX]=useState(0);
+  const [Y, setY]=useState(0);
 
-//   const [scrollprogress,setScrollProgress]=useState(0)
+  const [scrollprogress,setScrollProgress]=useState(0)
 
-//   const handleScroll=()=>{
-//     const position=window.pageYOffset;
-//     setScrollProgress(position/2377)
+  const handleScroll=()=>{
+    const position=window.pageYOffset;
+    setScrollProgress(position/2377)
     
-//   }
-//   useEffect(()=>{
-//     window.addEventListener("scroll",handleScroll,{passive:true})
-//     return()=>{
-//       window.removeEventListener("scroll",handleScroll);
+  }
+  useEffect(()=>{
+    window.addEventListener("scroll",handleScroll,{passive:true})
+    return()=>{
+      window.removeEventListener("scroll",handleScroll);
 
-//     }
-//   },[])
+    }
+  },[])
 
   
-//   return (
-//     <div className="relative" >
-//     <div className="grid absolute z-10" style={{height:"500vh", gap:"55vh"}}>
-//       <Summary style={{opacity:(scrollprogress<0.125)?1:0}} className="transition-opacity duration-300"></Summary>
-//       <Projects style={{opacity:(scrollprogress>0.4&&scrollprogress<0.6)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
-//       <Certs style={{opacity:(scrollprogress>0.90&&scrollprogress<1.2)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
-//       <Contact style={{opacity:(scrollprogress>1.3)?1:0}} className="transition-opacity duration-300" ></Contact>
-//     </div>
-
-//     <Canvas className="" style={{height:"100vh", position:"fixed", backgroundImage: "linear-gradient(rgb(255,197,253) ,rgb(246,155,213),rgb(216,90,91))"}} 
-//     shadows>
-//       <CameraAdjust scrollprogress={scrollprogress}></CameraAdjust>
-//       <Scene />
-//       {/* <OrbitControls></OrbitControls> */}
-//     </Canvas>
-//     </div>
-//   )
-// }
-function App() {
   return (
-    <div>
-      <img 
-        src="https://unnamedhat88.github.io/Portfolio/images/cert1AwsHD.png" 
-        alt="Test" 
-        style={{ width: '500px', height: '350px' }}
-      />
+    <div className="relative" >
+    <div className="grid absolute z-10" style={{height:"500vh", gap:"55vh"}}>
+      <Summary style={{opacity:(scrollprogress<0.125)?1:0}} className="transition-opacity duration-300"></Summary>
+      <Projects style={{opacity:(scrollprogress>0.4&&scrollprogress<0.6)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
+      <Certs style={{opacity:(scrollprogress>0.90&&scrollprogress<1.2)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
+      <Contact style={{opacity:(scrollprogress>1.3)?1:0}} className="transition-opacity duration-300" ></Contact>
     </div>
-  );
-}
 
+    <Canvas className="" style={{height:"100vh", position:"fixed", backgroundImage: "linear-gradient(rgb(255,197,253) ,rgb(246,155,213),rgb(216,90,91))"}} 
+    shadows>
+      <CameraAdjust scrollprogress={scrollprogress}></CameraAdjust>
+      <Scene />
+      {/* <OrbitControls></OrbitControls> */}
+    </Canvas>
+    </div>
+  )
+}
 
 export default App
