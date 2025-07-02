@@ -4,7 +4,7 @@ export function Certs(props){
     const n=3
     
     const CertsData=[
-        {title:"AWS Certified AI Practioner", 
+        {title:"AWS Certified AI Practitioner", 
             desc:`Learned the foundational knowledge of using Amazon's AI services such as Rekognition, Polly, Amazon Q.
              I also learned some foundational AI knowledge such as bias and variance, and retrieval-augmented learning(RAG).`
             , img:"https://unnamedhat88.github.io/Portfolio/images/cert1AwsHD.png"
