@@ -13,7 +13,7 @@ function CameraAdjust({scrollprogress}){
 
   const {camera} = useThree()
   console.log(scrollprogress)
-  const positionofxz=(-29*(scrollprogress))+7.5
+  const positionofxz=(-45*(scrollprogress))+7.5
   // console.log(positionofxz)
 
   
@@ -36,11 +36,30 @@ function App() {
   const [X, setX]=useState(0);
   const [Y, setY]=useState(0);
 
+  const [viewportHeight, setViewportHeight]=useState(window.innerHeight);
+
+  //for handling device resize
+  useEffect(()=>{
+    const handleResize = () =>{
+      setViewportHeight(window.innerHeight)
+    }
+
+    window.addEventListener("resize",handleResize);
+    return ()=> window.removeEventListener("resize", handleResize);
+  },[]);
+
+  const sectionCount=4
+  const gapSize=viewportHeight*0.3;
+  const scrollContainerHeight=sectionCount*viewportHeight+(gapSize*(sectionCount-1))
+
+
+
   const [scrollprogress,setScrollProgress]=useState(0)
 
   const handleScroll=()=>{
-    const position=window.pageYOffset;
-    setScrollProgress(position/2377)
+    const position=window.scrollY;
+    const progress=position/(scrollContainerHeight-viewportHeight);
+    setScrollProgress(Math.min(Math.max(progress,0),1))
     
   }
   useEffect(()=>{
@@ -49,16 +68,16 @@ function App() {
       window.removeEventListener("scroll",handleScroll);
 
     }
-  },[])
+  },[scrollContainerHeight,viewportHeight])
 
   
   return (
     <div className="relative" >
-    <div className="grid absolute z-10" style={{height:"500vh", gap:"55vh"}}>
-      <Summary style={{opacity:(scrollprogress<0.125)?1:0}} className="transition-opacity duration-300"></Summary>
-      <Projects style={{opacity:(scrollprogress>0.4&&scrollprogress<0.6)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
-      <Certs style={{opacity:(scrollprogress>0.90&&scrollprogress<1.2)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
-      <Contact style={{opacity:(scrollprogress>1.3)?1:0}} className="transition-opacity duration-300" ></Contact>
+    <div className="grid absolute z-10" style={{height:`${scrollContainerHeight}px`, gap:`${gapSize}px`}}>
+      <Summary style={{opacity:(scrollprogress<0.22)?1:0}} className="transition-opacity duration-300"></Summary>
+      <Projects style={{opacity:(scrollprogress>=0.27&&scrollprogress<0.48)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
+      <Certs style={{opacity:(scrollprogress>=0.53&&scrollprogress<0.73)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
+      <Contact style={{opacity:(scrollprogress>=0.77)?1:0}} className="transition-opacity duration-300" ></Contact>
     </div>
 
     <Canvas className="" style={{height:"100vh", position:"fixed", backgroundImage: "linear-gradient(rgb(255,197,253) ,rgb(246,155,213),rgb(216,90,91))"}} 

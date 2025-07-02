@@ -20,9 +20,9 @@ export function Contact(props){
         },
         {
             img:""
-            ,link:"mailto:brandon.portfolio88@gmail.com",
+            ,link:"brandon.portfolio88@gmail.com",
             title:"Gmail",
-            color:"red"
+            color:"#ffb199"
       
         },
             
@@ -39,10 +39,15 @@ export function Contact(props){
                     <div className="text-5xl mx-8" style={{fontWeight:"600",letterSpacing:"-1px"}}>{Text[lang].Contact}</div>
                     <div className="font-medium mt-2 mx-16 text-2xl semi-bold">{Text[lang].Contact_Me}</div>
                     <div className="relative grid items-center gap-4 px-6 mt-10 mx-10">
-                       {links.map((_roots,index)=>(
-                             <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4" key={index} style={{height:"100px",width:"300px", backgroundColor:links[index].color}} onClick={()=>window.open(links[index].link,"_blank")}>
-                                {/* <img className="h-full " src={links[index].img}></img> */}
-                                <p className="text-3xl">{links[index].title}</p>
+                       {links.map((item,index)=>(
+                             <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4" key={index} style={{height:"100px",width:"300px", backgroundColor:links[index].color}} 
+                             onClick={()=>{ if(item.title=="Gmail"){
+                                navigator.clipboard.writeText(item.link)
+                                alert("Email copied to clipboard")
+
+                             }else{
+                                window.open(item.link,"_blank")}}}>
+                                <p className="text-3xl">{item.title}</p>
                              </div>   
                         ))}
                     </div>
