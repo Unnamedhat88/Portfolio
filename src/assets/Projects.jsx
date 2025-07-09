@@ -32,7 +32,7 @@ export function Projects(props){
                 <div className=" ml-5 flex-1 flex flex-col justify-between ">
                     <div>
                         <p className="text-3xl md:text-5xl font-bold mb-4">{ProjectsData[props.X].title}</p>
-                        <p className="text-base md:text-xl mb-4">{ProjectsData[props.X].desc}</p>
+                        <p className="text-xl md:text-xl mb-4">{ProjectsData[props.X].desc}</p>
                         <p className="text-base md:text-xl font-medium">{ProjectsData[props.X].tech}</p>
                     </div >
                         <div className="flex justify-between  mt-8 mx-4 md:mx-16">
