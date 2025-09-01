@@ -78,28 +78,29 @@ function App() {
       })
     }
 
-    let startY = 0;
-    const handleTouchStart=(e)=>{
-      startY=e.touches[0].clientY;
-    }
-    const handleTouchMove=(e)=>{
-      e.preventDefault();
-      const deltaY=startY-e.touches[0].clientY;
-      window.scrollBy({
-        top:deltaY*0.5,
-        behavior:"auto",
-      })
-      startY=e.touches[0].clientY;
-    }
+    // let startY = 0;
+    // const handleTouchStart=(e)=>{
+    //   startY=e.touches[0].clientY;
+    // }
+    // const handleTouchMove=(e)=>{
+    //   e.preventDefault();
+    //   const deltaY=startY-e.touches[0].clientY;
+    //   window.scrollBy({
+    //     top:deltaY*0.5,
+    //     behavior:"auto",
+    //   })
+    //   startY=e.touches[0].clientY;
+    // }
   
 
   window.addEventListener("wheel", handleWheel,{passive:false});
-  window.addEventListener("touchstart", handleTouchStart,{passive:true});
-  window.addEventListener("touchmove", handleTouchMove,{passive:false});
+  // window.addEventListener("touchstart", handleTouchStart,{passive:true});
+  // window.addEventListener("touchmove", handleTouchMove,{passive:false});
   return () => {
     window.removeEventListener("wheel",handleWheel)
-    window.removeEventListener("touchstart",handleTouchStart)
-    window.removeEventListener("touchmove",handleTouchMove)};
+    // window.removeEventListener("touchstart",handleTouchStart)
+    // window.removeEventListener("touchmove",handleTouchMove)
+    };
 },[]);
 
   return (
