@@ -7,7 +7,7 @@ import Vertexobject from "../Shaders/Object.vert";
 import Fragmentobject from "../Shaders/Object.frag"
 import { shaderMaterial } from "@react-three/drei";
 import { uniform } from "three/src/nodes/TSL.js";
-export default function Object(){
+export default function Object({positionofxz}){
     const arrayCreated = useRef(false);
     const gltf = useLoader(GLTFLoader, 'images/models/environment.glb')
 //     const { uCausticSpeed,uCausticOffset,uCausticThickness } = useControls({ 
@@ -15,7 +15,7 @@ export default function Object(){
 //         Offset: {value:0.66,min:-1,max:1,step:0.01, onChange: (v)=>shaderMaterial.uniforms.uCausticOffset.value=v},
 //         Thickness: {value:0.5,min:-2,max:2,step:0.1, onChange: (v)=>shaderMaterial.uniforms.uCausticThickness.value=v},
 //         Intensity: {value:0.20,min:-10,max:10,step:0.01, onChange: (v)=>shaderMaterial.uniforms.uCausticIntensity.value=v},
-//         Scale: {value:10.0,min:-10,max:10,step:0.01, onChange: (v)=>shaderMaterial.uniforms.uCausticScale.value=v}
+//         Scale: {value:10.0,min:-10,max:50,step:0.01, onChange: (v)=>shaderMaterial.uniforms.uCausticScale.value=v}
 // })  
 
     
@@ -25,10 +25,15 @@ export default function Object(){
           uTime:{value:0},
           uCausticSpeed:{value:1.0},
           uCausticColor:{value: new THREE.Color("#ffffff")},
-          uCausticScale:{value:10.0},
+          uCausticScale:{value:27.4},
           uCausticOffset:{value:0.66},
           uCausticThickness:{value:0.5},
-          uCausticIntensity:{value: 0.28}
+          uCausticIntensity:{value: 0.28},
+          uFogColor: { value: new THREE.Color("#e187c0") },
+          uFogDensity: { value: 0.06 },         
+          uCamPos:{ value: new THREE.Vector3(positionofxz-4,3.5,positionofxz-4) }             
+
+
 
         });
       
@@ -57,6 +62,9 @@ export default function Object(){
           uCausticThickness:shaderMaterial.uniforms.uCausticThickness,
           uCausticIntensity: shaderMaterial.uniforms.uCausticIntensity,
           uColor:{value:color},
+          uFogColor: { value: new THREE.Color("#EBA2CC") },
+          uFogDensity: { value: 0.06 },
+          uCamPos:{ value: new THREE.Vector3(positionofxz-4, 3.5, positionofxz-4) }
         };
         
         
@@ -86,9 +94,11 @@ export default function Object(){
     useFrame((state, delta, xrFrame)=>{
       
       uniforms.current.uTime.value+=delta*0.5
+      uniforms.current.uCamPos.value.set(positionofxz-4,3.5,positionofxz-4)
 
       
       })
+
     return(
     <>
  

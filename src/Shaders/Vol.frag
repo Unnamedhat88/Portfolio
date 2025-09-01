@@ -9,22 +9,24 @@
 //               https://github.com/ashima/webgl-noise
 //               https://github.com/stegu/webgl-noise
 // 
-const Fragmentobject = `
-varying vec2 vUv;
+const FragmentVol = `
 uniform float uTime;
-uniform vec3 uCausticColor;
-uniform float uCausticSpeed;
-uniform float uCausticScale;
-uniform float uCausticOffset;
-uniform float uCausticThickness;
-uniform float uCausticIntensity;
-uniform vec3 uFogColor;
-uniform float uFogDensity;
 uniform vec3 uColor;
-uniform vec3 uCamPos;
-varying vec3 newpos;
-varying vec3 vViewPos;
-varying vec4 worldpos;
+uniform float uNoiseScale;
+uniform float uSmoothTop;
+uniform float uSmoothBottom;
+uniform float uFresnelPower;
+uniform vec3 uLightDir;
+uniform vec3 uLightPos;
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vWorldPos;
+varying vec2 vLightScreenPos;
+uniform vec3 uCameraPosition;
+uniform float uFogDensity;
+uniform vec3 uFogColor;
+
+
 vec3 mod289(vec3 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -116,44 +118,59 @@ float snoise(vec3 v)
   return 105.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
                                 dot(p2,x2), dot(p3,x3) ) );
   }
-
-//======================================================
-//Main
-//======================================================
+  
+//=====================================================================
+//main
+//=======================================================================
 void main(){
-    
+  vec3 localCoord= vWorldPos-vec3(-13,24,-15);
+  vec3 lightDir= normalize(uLightDir); 
+  float along = dot(localCoord, lightDir); 
+  vec3 perpNoise=localCoord-along*lightDir; 
+  vec3 noisePos=along*lightDir+perpNoise*uNoiseScale+vec3(uTime*0.2); 
+
+  float n1=snoise(noisePos+vec3(0.0,0.0,0.0)); 
+  float n2=snoise(noisePos+vec3(31.0,17.0,5.0)); 
+  float n3=snoise(noisePos+vec3(12.0,78.0,44.0)); 
+  float noiseVal=(n1+n2+n3)/3.0; 
+
+  float smoothMask=smoothstep(0.0,uSmoothBottom,vUv.y)*(1.0-smoothstep(uSmoothTop,1.0,vUv.y)); 
+  vec3 n=normalize(vNormal); 
+  vec3 viewDir=normalize(cameraPosition-localCoord); 
+
+  float fresnel = pow(1.0-abs(dot(n,viewDir)),uFresnelPower); 
  
-    vec3 color=uColor;
-    float t = uCausticSpeed * uTime;
 
-    float noise1 = abs(snoise(vec3(vUv.xy*uCausticScale, t)));
-    float noise2 = abs(snoise(vec3(vUv.yx*uCausticScale, -t)));
+  vec3 vViewPos= cameraPosition-vWorldPos;
+  vec3 color= uColor;
 
-    float caustic = uCausticOffset-(noise1+noise2)/2.0;
-    caustic=smoothstep(0.5-uCausticThickness, 0.5+uCausticThickness,caustic);
-    caustic = clamp(uCausticIntensity*caustic,0.0,1.0);
-
-    color.rgb=color.rgb+uCausticColor*caustic;
-
-    float threshold = 10.0;
-    float dist = length(vViewPos); 
-    float fogFactor=1.0-exp(-pow(dist*uFogDensity,2.0));
-    fogFactor = fogFactor-( 1.0 - exp(-pow(threshold * uFogDensity, 2.0)));
+  float threshold = 10.0;
+  float dist = length(vWorldPos-uCameraPosition); 
+  float fogFactor=1.0-exp(-pow(dist*uFogDensity,2.0));
+  fogFactor = fogFactor-( 1.0 - exp(-pow(threshold * uFogDensity, 2.0)));
     
-    if (dist>threshold){
-      float extra = (dist - threshold)/50.0;
-      fogFactor+=extra;
-    }
+  if (dist>threshold){
+    float extra = (dist - threshold)/50.0;
+    fogFactor+=extra;
+  }
+  fogFactor=clamp(fogFactor,0.0,1.0);
+  float alpha = clamp(noiseVal*fresnel*smoothMask*(1.0-fogFactor)*1.2,0.0,1.0); 
+  if(alpha<0.02){
+    alpha=0.0;
+  }
+ 
 
-    fogFactor=clamp(fogFactor,0.0,1.0);
-    color = mix(color,uFogColor,fogFactor);
 
 
+  gl_FragColor=vec4(color, alpha);
+    
 
-    gl_FragColor = vec4(color, 1.0);
+    
+
+
    
 
 }
 `
 
-export default Fragmentobject;
+export default FragmentVol;

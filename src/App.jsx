@@ -9,14 +9,9 @@ import Scene from './assets/Scene'
 import * as THREE from 'three'
 import { Contact } from './assets/Contact'
 
-function CameraAdjust({scrollprogress}){
+function CameraAdjust({positionofxz}){
 
   const {camera} = useThree()
-  console.log(scrollprogress)
-  const positionofxz=(-45*(scrollprogress))+7.5
-  // console.log(positionofxz)
-
-  
 
   useEffect(()=>{
     window.scrollTo(0,0)
@@ -30,6 +25,7 @@ function CameraAdjust({scrollprogress}){
     
 
   },[positionofxz])
+  return null;
 }
 
 function App() {
@@ -70,20 +66,52 @@ function App() {
     }
   },[scrollContainerHeight,viewportHeight])
 
+  const positionofxz=(-49*(scrollprogress))+12.5
+
+  useEffect(()=>{
+    //for desktop
+    const handleWheel = (e) =>{
+      e.preventDefault()
+      window.scrollBy({
+        top: e.deltaY*0.5,
+        behavior:"auto",
+      })
+    }
+
+    let startY = 0;
+    const handleTouchStart=(e)=>{
+      e.preventDefault();
+      const deltaY=startY-e.touches[0].clientY;
+      window.scrollBy({
+        top:deltaY*0.5,
+        behavior:"auto",
+      })
+      startY=e.touches[0].clientY;
+    }
   
+
+  window.addEventListener("wheel", handleWheel,{passive:false});
+  window.addEventListener("touchstart", handleTouchStart,{passive:false});
+  window.addEventListener("touchmove", handleTouchStart,{passive:false});
+  return () => {
+    window.removeEventListener("wheel",handleWheel)
+    window.removeEventListener("touchstart",handleTouchStart)
+    window.removeEventListener("touchmove",handleTouchStart)};
+},[]);
+
   return (
     <div className="relative" >
     <div className="grid absolute z-10" style={{height:`${scrollContainerHeight}px`, gap:`${gapSize}px`}}>
-      <Summary style={{opacity:(scrollprogress<0.22)?1:0}} className="transition-opacity duration-300"></Summary>
-      <Projects style={{opacity:(scrollprogress>=0.27&&scrollprogress<0.48)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
-      <Certs style={{opacity:(scrollprogress>=0.53&&scrollprogress<0.73)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
-      <Contact style={{opacity:(scrollprogress>=0.77)?1:0}} className="transition-opacity duration-300" ></Contact>
+      <Summary style={{opacity:(scrollprogress<0.03)?1:0}} className="transition-opacity duration-300"></Summary>
+      <Projects style={{opacity:(scrollprogress>=0.27&&scrollprogress<0.41)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
+      <Certs style={{opacity:(scrollprogress>=0.58&&scrollprogress<0.73)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
+      <Contact style={{opacity:(scrollprogress>=0.9)?1:0}} className="transition-opacity duration-300" ></Contact>
     </div>
-
-    <Canvas className="" style={{height:"100vh", position:"fixed", backgroundImage: "linear-gradient(rgb(255,197,253) ,rgb(246,155,213),rgb(216,90,91))"}} 
+   
+    <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0"}}
     shadows>
-      <CameraAdjust scrollprogress={scrollprogress}></CameraAdjust>
-      <Scene />
+      <CameraAdjust positionofxz={positionofxz}></CameraAdjust>
+      <Scene positionofxz={positionofxz}/>
       {/* <OrbitControls></OrbitControls> */}
     </Canvas>
     </div>

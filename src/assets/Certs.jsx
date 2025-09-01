@@ -1,29 +1,24 @@
 import Text from "./Text.json"
 export function Certs(props){
     const lang="English"
-    const n=3
+    const n=2
     
     const CertsData=[
+        {title:"AWS Certified Cloud Practitioner", 
+            desc:`Gained foundational knowledge of AWS cloud concepts, including core services such as EC2, S3, RDS, and Lambda.
+            Also learned about cloud architecture best practices, security, cost management and basic deployment and monitoring strategies. `
+            , img:"https://unnamedhat88.github.io/Portfolio/images/cert2AwsHD.png"
+            ,link:"https://www.credly.com/badges/e75079a6-a347-4a90-8cda-166e5c0dc61e/public_url"
+            },
         {title:"AWS Certified AI Practitioner", 
             desc:`Learned the foundational knowledge of using Amazon's AI services such as Rekognition, Polly, Amazon Q.
              I also learned some foundational AI knowledge such as bias and variance, and retrieval-augmented learning(RAG).`
             , img:"https://unnamedhat88.github.io/Portfolio/images/cert1AwsHD.png"
             ,link:"https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url"
             },
+        
 
-         {title:"Figma UI UX Design Essentials",
-         desc: `Learned the software Figma for website UI UX designs, including how to create wireframes, prorotypes, and design components
-         . Also learned about intuitive website design both on mobile and PC.`
-         , img:"https://unnamedhat88.github.io/Portfolio/images/Cert2Figma.jpg"
-         ,link:"https://www.udemy.com/certificate/UC-0517c98b-5969-42ac-b170-dca57e23650f/"
-        },
-
-        {title:"React Three Fiber",
-         desc: `Learned React Three Fiber which allows developers to render and interact with 3D objects directly inside of the browser
-        using React. As well as learned the essential 3D scene elements such as camera, lighting, and object controls.`
-         , img:"https://unnamedhat88.github.io/Portfolio/images/Cert3R3F.jpg"
-         ,link:"https://www.udemy.com/certificate/UC-5a4ce06c-20e1-4d04-bb6f-c1427ac598cf/"
-        },
+        
 
     ]
     const Cert_card = (props) =>{
