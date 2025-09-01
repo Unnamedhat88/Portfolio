@@ -86,7 +86,7 @@ function App() {
       e.preventDefault();
       const deltaY=startY-e.touches[0].clientY;
       window.scrollBy({
-        top:deltaY*0.8,
+        top:deltaY*0.5,
         behavior:"auto",
       })
       startY=e.touches[0].clientY;
@@ -111,7 +111,7 @@ function App() {
       <Contact style={{opacity:(scrollprogress>=0.9)?1:0}} className="transition-opacity duration-300" ></Contact>
     </div>
    
-    <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0"}}
+    <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0", touchAction:"pan-y"}}
     shadows>
       <CameraAdjust positionofxz={positionofxz}></CameraAdjust>
       <Scene positionofxz={positionofxz}/>
