@@ -86,7 +86,7 @@ function App() {
       e.preventDefault();
       const deltaY=startY-e.touches[0].clientY;
       window.scrollBy({
-        top:deltaY*0.5,
+        top:deltaY*0.8,
         behavior:"auto",
       })
       startY=e.touches[0].clientY;
