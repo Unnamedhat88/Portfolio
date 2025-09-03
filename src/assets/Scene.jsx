@@ -97,7 +97,7 @@ export default function Scene({positionofxz}) {
     
 
     <Object positionofxz={positionofxz}></Object>
-    <Stats></Stats>
+
     <VolumetricLights positionofxz={positionofxz}></VolumetricLights>
 
 

@@ -68,40 +68,40 @@ function App() {
 
   const positionofxz=(-49*(scrollprogress))+12.5
 
-  useEffect(()=>{
-    //for desktop
-    const handleWheel = (e) =>{
-      e.preventDefault()
-      window.scrollBy({
-        top: e.deltaY*0.5,
-        behavior:"auto",
-      })
-    }
+//   useEffect(()=>{
+//     //for desktop
+//     const handleWheel = (e) =>{
+//       e.preventDefault()
+//       window.scrollBy({
+//         top: e.deltaY*0.5,
+//         behavior:"auto",
+//       })
+//     }
 
-    // let startY = 0;
-    // const handleTouchStart=(e)=>{
-    //   startY=e.touches[0].clientY;
-    // }
-    // const handleTouchMove=(e)=>{
-    //   e.preventDefault();
-    //   const deltaY=startY-e.touches[0].clientY;
-    //   window.scrollBy({
-    //     top:deltaY*0.5,
-    //     behavior:"auto",
-    //   })
-    //   startY=e.touches[0].clientY;
-    // }
+//     // let startY = 0;
+//     // const handleTouchStart=(e)=>{
+//     //   startY=e.touches[0].clientY;
+//     // }
+//     // const handleTouchMove=(e)=>{
+//     //   e.preventDefault();
+//     //   const deltaY=startY-e.touches[0].clientY;
+//     //   window.scrollBy({
+//     //     top:deltaY*0.5,
+//     //     behavior:"auto",
+//     //   })
+//     //   startY=e.touches[0].clientY;
+//     // }
   
 
-  window.addEventListener("wheel", handleWheel,{passive:false});
-  // window.addEventListener("touchstart", handleTouchStart,{passive:true});
-  // window.addEventListener("touchmove", handleTouchMove,{passive:false});
-  return () => {
-    window.removeEventListener("wheel",handleWheel)
-    // window.removeEventListener("touchstart",handleTouchStart)
-    // window.removeEventListener("touchmove",handleTouchMove)
-    };
-},[]);
+//   window.addEventListener("wheel", handleWheel,{passive:false});
+//   // window.addEventListener("touchstart", handleTouchStart,{passive:true});
+//   // window.addEventListener("touchmove", handleTouchMove,{passive:false});
+//   return () => {
+//     window.removeEventListener("wheel",handleWheel)
+//     // window.removeEventListener("touchstart",handleTouchStart)
+//     // window.removeEventListener("touchmove",handleTouchMove)
+//     };
+// },[]);
 
   return (
     <div className="relative" >
