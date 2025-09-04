@@ -7,13 +7,13 @@ export function Certs(props){
         {title:"AWS Certified Cloud Practitioner", 
             desc:`Gained foundational knowledge of AWS cloud concepts, including core services such as EC2, S3, RDS, and Lambda.
             Also learned about cloud architecture best practices, security, cost management and basic deployment and monitoring strategies. `
-            , img:"https://raw.githubusercontent.com/Unnamedhat88/Portfolio/refs/heads/main/public/images/cert2AwsHD.png"
+            , img:"/images/AWSCloudPractitioner.webp"
             ,link:"https://www.credly.com/badges/e75079a6-a347-4a90-8cda-166e5c0dc61e/public_url"
             },
         {title:"AWS Certified AI Practitioner", 
             desc:`Learned the foundational knowledge of using Amazon's AI services such as Rekognition, Polly, Amazon Q.
              I also learned some foundational AI knowledge such as bias and variance, and retrieval-augmented learning(RAG).`
-            , img:"https://unnamedhat88.github.io/Portfolio/images/cert1AwsHD.png"
+            , img:"/images/AWSAIPractitioner.webp"
             ,link:"https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url"
             },
         

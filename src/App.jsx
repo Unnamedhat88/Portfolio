@@ -68,15 +68,15 @@ function App() {
 
   const positionofxz=(-49*(scrollprogress))+12.5
 
-//   useEffect(()=>{
-//     //for desktop
-//     const handleWheel = (e) =>{
-//       e.preventDefault()
-//       window.scrollBy({
-//         top: e.deltaY*0.5,
-//         behavior:"auto",
-//       })
-//     }
+  useEffect(()=>{
+    //for desktop
+    const handleWheel = (e) =>{
+      e.preventDefault()
+      window.scrollBy({
+        top: e.deltaY*0.5,
+        behavior:"auto",
+      })
+    }
 
 //     // let startY = 0;
 //     // const handleTouchStart=(e)=>{
@@ -93,15 +93,15 @@ function App() {
 //     // }
   
 
-//   window.addEventListener("wheel", handleWheel,{passive:false});
+  window.addEventListener("scroll", handleWheel,{passive:false});
 //   // window.addEventListener("touchstart", handleTouchStart,{passive:true});
 //   // window.addEventListener("touchmove", handleTouchMove,{passive:false});
-//   return () => {
-//     window.removeEventListener("wheel",handleWheel)
+  return () => {
+    window.removeEventListener("scroll",handleWheel)
 //     // window.removeEventListener("touchstart",handleTouchStart)
 //     // window.removeEventListener("touchmove",handleTouchMove)
-//     };
-// },[]);
+    };
+},[]);
 
   return (
     <div className="relative" >
