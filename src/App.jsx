@@ -22,7 +22,6 @@ function CameraAdjust({positionofxz}){
     camera.position.set(positionofxz,5,positionofxz);
     camera.lookAt(new THREE.Vector3(positionofxz-4,3.5,positionofxz-4));
     
-    
 
   },[positionofxz])
   return null;
@@ -48,34 +47,32 @@ function App() {
   const gapSize=viewportHeight*0.3;
   const scrollContainerHeight=sectionCount*viewportHeight+(gapSize*(sectionCount-1))
 
-
-
   const [scrollprogress,setScrollProgress]=useState(0)
 
-  const handleScroll=()=>{
-    const position=window.scrollY;
-    const progress=position/(scrollContainerHeight-viewportHeight);
-    setScrollProgress(Math.min(Math.max(progress,0),1))
-    
-  }
-  useEffect(()=>{
-    window.addEventListener("scroll",handleScroll,{passive:true})
-    return()=>{
-      window.removeEventListener("scroll",handleScroll);
-
-    }
-  },[scrollContainerHeight,viewportHeight])
 
   const positionofxz=(-49*(scrollprogress))+12.5
 
   useEffect(()=>{
+    let isScrollCooldown=false;
     //for desktop
     const handleWheel = (e) =>{
       e.preventDefault()
-      window.scrollBy({
-        top: e.deltaY*0.5,
-        behavior:"auto",
-      })
+
+      if(isScrollCooldown) return;
+    
+      if(e.deltaY>0){
+        setScrollProgress(prev=>Math.min(prev+0.25,1.0))
+        console.log("yeet")
+      }
+      else{
+        setScrollProgress(prev=>Math.max(prev-0.25,0.0))
+        console.log("inverse yeet")
+      }
+      isScrollCooldown=true;
+      setTimeout(()=>{
+        isScrollCooldown=false
+      },2000)
+      
     }
 
 //     // let startY = 0;
@@ -93,11 +90,11 @@ function App() {
 //     // }
   
 
-  window.addEventListener("scroll", handleWheel,{passive:false});
+  window.addEventListener("wheel", handleWheel,{passive:false});
 //   // window.addEventListener("touchstart", handleTouchStart,{passive:true});
 //   // window.addEventListener("touchmove", handleTouchMove,{passive:false});
   return () => {
-    window.removeEventListener("scroll",handleWheel)
+    window.removeEventListener("wheel",handleWheel)
 //     // window.removeEventListener("touchstart",handleTouchStart)
 //     // window.removeEventListener("touchmove",handleTouchMove)
     };
@@ -105,7 +102,7 @@ function App() {
 
   return (
     <div className="relative" >
-    <div className="grid absolute z-10" style={{height:`${scrollContainerHeight}px`, gap:`${gapSize}px`}}>
+    <div className="grid absolute z-10">
       <Summary style={{opacity:(scrollprogress<0.03)?1:0}} className="transition-opacity duration-300"></Summary>
       <Projects style={{opacity:(scrollprogress>=0.27&&scrollprogress<0.41)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
       <Certs style={{opacity:(scrollprogress>=0.58&&scrollprogress<0.73)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
