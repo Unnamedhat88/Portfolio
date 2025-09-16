@@ -1,5 +1,5 @@
 import { useControls } from 'leva'
-import { Canvas,useThree } from '@react-three/fiber'
+import { Canvas,useFrame,useThree } from '@react-three/fiber'
 import { useRef,useEffect,useState } from 'react'
 import { Summary } from './assets/Summary'
 import { Projects } from './assets/Projects'
@@ -8,22 +8,29 @@ import {OrbitControls} from '@react-three/drei'
 import Scene from './assets/Scene'
 import * as THREE from 'three'
 import { Contact } from './assets/Contact'
+import gsap from 'gsap'
+import { Toolbar } from './assets/Toolbar'
 
-function CameraAdjust({positionofxz}){
+function CameraAdjust({scrollProgress,setpositionofxz}){
 
   const {camera} = useThree()
 
   useEffect(()=>{
     window.scrollTo(0,0)
   },[])
-  useEffect(()=>{
-    
-    console.log(positionofxz)
-    camera.position.set(positionofxz,5,positionofxz);
-    camera.lookAt(new THREE.Vector3(positionofxz-4,3.5,positionofxz-4));
-    
 
-  },[positionofxz])
+  useFrame(()=>{
+    
+    const val = scrollProgress.current.value;
+    const posxz=(-49*(scrollProgress.current.value))+11
+    camera.position.set(posxz,5,posxz);
+    camera.lookAt(new THREE.Vector3(posxz-4,3.5,posxz-4));
+    setpositionofxz(posxz)
+    //11
+    //-5.17
+    //-21.34
+    //-37.51
+  })
   return null;
 }
 
@@ -43,14 +50,11 @@ function App() {
     return ()=> window.removeEventListener("resize", handleResize);
   },[]);
 
-  const sectionCount=4
-  const gapSize=viewportHeight*0.3;
-  const scrollContainerHeight=sectionCount*viewportHeight+(gapSize*(sectionCount-1))
 
-  const [scrollprogress,setScrollProgress]=useState(0)
-
-
-  const positionofxz=(-49*(scrollprogress))+12.5
+  const scrollprogress=useRef({value: 0})
+  const [positionofxz,setpositionofxz]=useState(0)
+  const [activeDiv, setActiveDiv]=useState(0)
+  const [animationFinished, setAnimatioFinished]=useState(true)
 
   useEffect(()=>{
     let isScrollCooldown=false;
@@ -58,20 +62,54 @@ function App() {
     const handleWheel = (e) =>{
       e.preventDefault()
 
-      if(isScrollCooldown) return;
+      if(isScrollCooldown || Math.abs(e.deltaY)<10) return;
+      let target
+      let divInt
     
       if(e.deltaY>0){
-        setScrollProgress(prev=>Math.min(prev+0.25,1.0))
+        target =Math.min(scrollprogress.current.value+0.33,0.99)
+        setActiveDiv(prev=> { 
+          const newval=Math.min(3,prev+1);
+          console.log(newval);
+          window.scrollTo({top:viewportHeight*newval, behavior:"smooth" })
+          return newval
+        })
+      
+
         console.log("yeet")
+     
       }
       else{
-        setScrollProgress(prev=>Math.max(prev-0.25,0.0))
+        target =Math.max(scrollprogress.current.value-0.33,0.0)
+        setActiveDiv(prev=> { 
+          const newval=Math.max(0,prev-1);
+          console.log(newval);
+          window.scrollTo({top:viewportHeight*newval, behavior:"smooth" })
+          return newval
+        })
+         
         console.log("inverse yeet")
+        
       }
+      setAnimatioFinished(false);
+      
+      
+      gsap.to(scrollprogress.current,{
+        value: target,
+        duration:1.7,
+        ease:"power3.out",
+        onUpdate:()=>{
+          const val=scrollprogress.current.value;
+        }, 
+        onComplete:()=>{
+          setAnimatioFinished(true);
+
+        }
+      })
       isScrollCooldown=true;
       setTimeout(()=>{
         isScrollCooldown=false
-      },2000)
+      },1000)
       
     }
 
@@ -100,22 +138,27 @@ function App() {
     };
 },[]);
 
-  return (
-    <div className="relative" >
-    <div className="grid absolute z-10">
-      <Summary style={{opacity:(scrollprogress<0.03)?1:0}} className="transition-opacity duration-300"></Summary>
-      <Projects style={{opacity:(scrollprogress>=0.27&&scrollprogress<0.41)?1:0}} className="transition-opacity duration-300"  X={X} setX={setX}></Projects>
-      <Certs style={{opacity:(scrollprogress>=0.58&&scrollprogress<0.73)?1:0}} className="transition-opacity duration-300"  Y={Y} setY={setY}></Certs>
-      <Contact style={{opacity:(scrollprogress>=0.9)?1:0}} className="transition-opacity duration-300" ></Contact>
+  return (<>
+  
+    <div className="relative bg-red-300" >
+    <Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv}></Toolbar>
+    
+    <div className="grid absolute z-10 inset-0">
+      <Summary style={{opacity:(activeDiv==0&&animationFinished)?1:0}} className="transition-opacity duration-100"></Summary>
+      <Projects style={{opacity:(activeDiv==1&&animationFinished)?1:0}} className="transition-opacity duration-100 "  X={X} setX={setX}></Projects>
+      <Certs style={{opacity:(activeDiv==2&&animationFinished)?1:0}} className="transition-opacity duration-100 "  Y={Y} setY={setY}></Certs>
+      <Contact style={{opacity:(activeDiv==3&&animationFinished)?1:0}} className="transition-opacity duration-100 " ></Contact>
     </div>
    
     <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0", touchAction:"pan-y"}}
     shadows>
-      <CameraAdjust positionofxz={positionofxz}></CameraAdjust>
+      <CameraAdjust scrollProgress={scrollprogress} setpositionofxz={setpositionofxz}></CameraAdjust>
       <Scene positionofxz={positionofxz}/>
       {/* <OrbitControls></OrbitControls> */}
     </Canvas>
+    
     </div>
+    </>
   )
 }
 
