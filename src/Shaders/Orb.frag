@@ -5,6 +5,7 @@ varying vec3 vViewPos;
 uniform vec3 uFogColor;
 uniform float uFogDensity;
 
+
 void main(){
     float distR = length(vUv-vec2(0.5,0.5));
 
@@ -28,6 +29,7 @@ void main(){
     float finalAlpha= alpha*(1.0-fogFactor);
     
     gl_FragColor=vec4(mix(vec3(1.0),uFogColor,fogFactor),finalAlpha);
+  
     
 
     

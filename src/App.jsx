@@ -62,7 +62,7 @@ function App() {
     const handleWheel = (e) =>{
       e.preventDefault()
 
-      if(isScrollCooldown || Math.abs(e.deltaY)<10) return;
+      if(isScrollCooldown || Math.abs(e.deltaY)<20) return;
       let target
       let divInt
     
@@ -109,7 +109,7 @@ function App() {
       isScrollCooldown=true;
       setTimeout(()=>{
         isScrollCooldown=false
-      },1000)
+      },1700)
       
     }
 

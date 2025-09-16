@@ -29,7 +29,8 @@ export default function Object({positionofxz}){
           uCausticOffset:{value:0.66},
           uCausticThickness:{value:0.5},
           uCausticIntensity:{value: 0.28},
-          uFogColor: { value: new THREE.Color("#e187c0") },
+          // uFogColor: { value: new THREE.Color("#e187c0") },
+          uFogColor: { value: new THREE.Color("#EBA2CC") },
           uFogDensity: { value: 0.06 },         
           uCamPos:{ value: new THREE.Vector3(positionofxz-4,3.5,positionofxz-4) }             
 

@@ -15,14 +15,14 @@ import VolumetricLights from "./VolumetricLights";
 
 export default function Scene({positionofxz}) {
   
-  const orbRefs= useRef([])
+  const orbRefs= useRef(null)
   
   const orbPosition = useRef(Array.from({length:200},()=>[
     Math.random() * 200 -170,
     Math.random() * 33 +1,
     Math.random() * 200 -170,
-    Math.random()*0.6+0.2,
-    Math.random()*2,
+    Math.random()*0.6+0.2, //A value
+    Math.random()*2, //B value
   ]
 
   ))
@@ -44,7 +44,7 @@ export default function Scene({positionofxz}) {
       uScrollPos: { value: 0 },
     });
     
-
+  const dummy=new THREE.Object3D();
   useFrame((state, delta, xrFrame)=>{
     if(plane.current){
       plane.current.material.uniforms.uTime.value+=delta*0.5;
@@ -52,16 +52,21 @@ export default function Scene({positionofxz}) {
     
     orbuniforms.current.uCamPos.value.set(positionofxz-4,3.5,positionofxz-4)
 
-    orbRefs.current.forEach((mesh,i)=>{
-      if (!mesh) return;
-      const t =state.clock.getElapsedTime();
+    const t = state.clock.getElapsedTime();
+
+    for (let i=0; i<orbPosition.current.length;i++){
       const [x,y,z,a,b]=orbPosition.current[i];
-      
-      mesh.scale.setScalar(Math.abs(Math.sin(t*a+b)))
-      mesh.lookAt(new THREE.Vector3(positionofxz,3.5,positionofxz))
-        
-      
-    })
+
+      const s = Math.abs(Math.sin(t*a+b))
+
+      dummy.position.set(x,y,z);
+      dummy.scale.set(s,s,s);
+      dummy.lookAt(new THREE.Vector3(positionofxz,3.5,positionofxz));
+
+      dummy.updateMatrix();
+      orbRefs.current.setMatrixAt(i,dummy.matrix)
+    }
+    orbRefs.current.instanceMatrix.needsUpdate=true;
     
   
 
@@ -82,15 +87,19 @@ export default function Scene({positionofxz}) {
       <shaderMaterial fragmentShader={Fragmentwater} vertexShader={Vertexwater} uniforms={uniforms.current} transparent />
     </mesh> */}
 
-    {orbPosition.current.map((pos,i)=>{
+    
+    <instancedMesh ref={orbRefs} args={[new THREE.PlaneGeometry(2.0,2.0), new THREE.ShaderMaterial({
+      blending:THREE.AdditiveBlending,
+      depthTest:true,
+      depthWrite:false,
+      vertexShader: Vertexorb,
+      fragmentShader: Fragmentorb,
+      transparent : true,
+    uniforms:orbuniforms.current
+    }),orbPosition.current.length]} >
+    
       
-      return(
-      <mesh key={i} ref={(el)=>(orbRefs.current[i]=el)} position={[pos[0],pos[1],pos[2]]} >
-      <planeGeometry args={[1.5,1.5]}/>
-      <shaderMaterial blending={THREE.AdditiveBlending} depthTest={true} depthWrite={false} vertexShader={Vertexorb} fragmentShader={Fragmentorb} transparent uniforms={orbuniforms.current}/>
-      
-    </mesh>)})
-  }
+    </instancedMesh>
 
   
 
