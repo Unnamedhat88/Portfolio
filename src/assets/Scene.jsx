@@ -88,7 +88,7 @@ export default function Scene({positionofxz}) {
     </mesh> */}
 
     
-    <instancedMesh ref={orbRefs} args={[new THREE.PlaneGeometry(2.0,2.0), new THREE.ShaderMaterial({
+    <instancedMesh ref={orbRefs} args={[new THREE.PlaneGeometry(1.5,1.5), new THREE.ShaderMaterial({
       blending:THREE.AdditiveBlending,
       depthTest:true,
       depthWrite:false,
