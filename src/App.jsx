@@ -11,7 +11,7 @@ import { Contact } from './assets/Contact'
 import gsap from 'gsap'
 import { Toolbar } from './assets/Toolbar'
 
-function CameraAdjust({scrollProgress,setpositionofxz}){
+function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZoomedin}){
 
   const {camera} = useThree()
 
@@ -20,11 +20,14 @@ function CameraAdjust({scrollProgress,setpositionofxz}){
   },[])
 
   useFrame(()=>{
+    if(cameraBusy.current) return;
+    if(zoomedin) return;
     
     const val = scrollProgress.current.value;
     const posxz=(-49*(scrollProgress.current.value))+11
     camera.position.set(posxz,5,posxz);
     camera.lookAt(new THREE.Vector3(posxz-4,3.5,posxz-4));
+    
     setpositionofxz(posxz)
     //11
     //-5.17
@@ -35,9 +38,11 @@ function CameraAdjust({scrollProgress,setpositionofxz}){
 }
 
 function App() {
-  const [X, setX]=useState(0);
-  const [Y, setY]=useState(0);
-
+  const [tutorial,setTutorial]=useState([1,1,1,1])
+  const [zoomedin,setZoomedin]=useState(false);
+  
+  const [focusObject, setFocusObject]=useState(0)
+  const cameraBusy=useRef(false)
   const [viewportHeight, setViewportHeight]=useState(window.innerHeight);
 
   //for handling device resize
@@ -60,27 +65,30 @@ function App() {
     let isScrollCooldown=false;
     //for desktop
     const handleWheel = (e) =>{
+      if(zoomedin){
+        e.preventDefault();
+        return
+      }
       e.preventDefault()
 
       if(isScrollCooldown || Math.abs(e.deltaY)<20) return;
       let target
       let divInt
     
-      if(e.deltaY>0){
-        target =Math.min(scrollprogress.current.value+0.33,0.99)
+      if(e.deltaY>0 ){
+        if(scrollprogress.current.value+0.33>1.0) return;
+        target =scrollprogress.current.value+0.33
         setActiveDiv(prev=> { 
           const newval=Math.min(3,prev+1);
           console.log(newval);
           window.scrollTo({top:viewportHeight*newval, behavior:"smooth" })
           return newval
         })
-      
-
-        console.log("yeet")
-     
+    
       }
       else{
-        target =Math.max(scrollprogress.current.value-0.33,0.0)
+        if(scrollprogress.current.value-0.33<-0.01) return;
+        target =scrollprogress.current.value-0.33
         setActiveDiv(prev=> { 
           const newval=Math.max(0,prev-1);
           console.log(newval);
@@ -88,7 +96,7 @@ function App() {
           return newval
         })
          
-        console.log("inverse yeet")
+      
         
       }
       setAnimatioFinished(false);
@@ -136,24 +144,24 @@ function App() {
 //     // window.removeEventListener("touchstart",handleTouchStart)
 //     // window.removeEventListener("touchmove",handleTouchMove)
     };
-},[]);
+},[zoomedin]);
 
   return (<>
   
     <div className="relative bg-red-300" >
-    <Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv}></Toolbar>
+    <Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin}></Toolbar>
     
     <div className="grid absolute z-10 inset-0">
-      <Summary style={{opacity:(activeDiv==0&&animationFinished)?1:0}} className="transition-opacity duration-100"></Summary>
-      <Projects style={{opacity:(activeDiv==1&&animationFinished)?1:0}} className="transition-opacity duration-100 "  X={X} setX={setX}></Projects>
-      <Certs style={{opacity:(activeDiv==2&&animationFinished)?1:0}} className="transition-opacity duration-100 "  Y={Y} setY={setY}></Certs>
-      <Contact style={{opacity:(activeDiv==3&&animationFinished)?1:0}} className="transition-opacity duration-100 " ></Contact>
+      <div style={{opacity:(activeDiv==0&&!tutorial[0])?1:0, marginTop:"120px", textAlign:"right", marginRight:"20vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the TV to see my profile</div>
+      <div style={{opacity:(activeDiv==1&&!tutorial[1])?1:0, marginTop:"80px", textAlign:"left", marginLeft:"15vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the vending machine<br/> to see my projects</div>
+      <div style={{opacity:(activeDiv==2&&!tutorial[2])?1:0, marginTop:"-150px", textAlign:"right", marginRight:"20vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the laptop to see my<br/> certificates</div>
+     <div style={{opacity:(activeDiv==3&&!tutorial[3])?1:0, marginTop:"-100px", textAlign:"left", marginLeft:"15vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the phone to<br/> contact me</div>
     </div>
    
     <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0", touchAction:"pan-y"}}
     shadows>
-      <CameraAdjust scrollProgress={scrollprogress} setpositionofxz={setpositionofxz}></CameraAdjust>
-      <Scene positionofxz={positionofxz}/>
+      <CameraAdjust scrollProgress={scrollprogress} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy}  zoomedin={zoomedin} setZoomedin={setZoomedin}></CameraAdjust>
+      <Scene positionofxz={positionofxz} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy} focusObject={focusObject} setFocusObject={setFocusObject} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin} tutorial={tutorial} setTutorial={setTutorial}/>
       {/* <OrbitControls></OrbitControls> */}
     </Canvas>
     

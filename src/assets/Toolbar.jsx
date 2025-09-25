@@ -4,9 +4,10 @@ import CertIcon from "/images/Awards.svg";
 import ContactIcon from "/images/Contacts.svg";
 import gsap from "gsap";
 
-export function Toolbar({viewportHeight,setActiveDiv,scrollprogress,activeDiv}){
+export function Toolbar({viewportHeight,setActiveDiv,scrollprogress,activeDiv,zoomedin, setZoomedin}){
     const array=['0.8rem','4.3rem','8.1rem','11.8rem']
     const jumpSection = (targetIndex) =>{
+        if(zoomedin)return;
         let target=targetIndex*0.33
         setActiveDiv(targetIndex)
 

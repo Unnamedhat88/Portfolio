@@ -1,7 +1,7 @@
 import Text from "./Text.json"
-export function Certs(props){
+export function Certs({animateCamera,cameraBusy,originalCameraPosition,originalLookAt,camera, positionofxz,zoomedin,setZoomedin}){
     const lang="English"
-    const n=2
+    // const n=2
     
     const CertsData=[
         {title:"AWS Certified Cloud Practitioner", 
@@ -16,58 +16,41 @@ export function Certs(props){
             , img:"/images/AWSAIPractitioner.webp"
             ,link:"https://www.credly.com/badges/98f22b06-b4dd-4dcd-a219-db0d2c32aa81/public_url"
             },
-        
-
-        
-
     ]
-    const Cert_card = (props) =>{
+    const Cert_icon = ({cert}) =>{
         return(<>
-        <div className="grid my-4 bg-red-100 rounded-xl mx-4 sm:mx-6 md:mx-10" style={{marginInline:"20px",minHeight: '550px' }}>
-            <div className="flex flex-col md:flex-row py-6 px-6 md:px-10 gap-6 md:gap-10 items-center">
-            <img  src={CertsData[props.Y].img} className="object-contain rounded-lg w-full md:w-[500px] h-[250px] md:h-[350px]" style={{width:"500px", height:"350px"}}></img>
-                <div className=" ml-0 md:ml-5 flex-1 flex flex-col justify-between">
-                    <div>
-                    <p className="text-3xl md:text-5xl font-bold mb-4">{CertsData[props.Y].title}</p>
-                    <p className="text-base md:text-xl ">{CertsData[props.Y].desc}</p>
-                    </div >
-                        <div className="flex justify-center md:justify-start pt-8">
-                        <div className={`border-gray-700 border bg-yellow-300 px-8 py-2 text-lg rounded-xl cursor-pointer${(CertsData[props.Y].prototypeLink=="NA")?"invisible":""}`} onClick={()=>window.open(CertsData[props.Y].link,"_blank")}>Link</div>
-                    </div>
-                    
-                </div>
-               
-            </div>
-            <div className="mt-6 -mb-6 flex gap-3 justify-center ">
-            {CertsData.map((_roots,index)=>(
-            <div key={index} className={` rounded-full ${index==props.Y?"bg-yellow-600":"bg-gray-400 "}`} style={{height:"20px",width:"20px"}}></div>   
-        ))}
-            </div>
+        <div className="flex flex-col items-center cursor-pointer grid mx-5 " style={{width:"160px", height:"220px"}} onClick={()=>window.open(`${cert.link}`,"_blank")}>
+            <img className="w-full h-auto " src={cert.img}></img>
+            <p className="text-xl mt-2 flex justify-center font-300 text-center text-white">{cert.title}</p>
         </div>
+        
+        
        
         </>)
     }
 
     
     return (
-         <div className={`h-screen grid ${props.className}`} style={props.style}>
-             <div className="relative mx-4 md:mx-16 my-10">
-                <div className="absolute h-full w-full bg-red-100 rounded-xl" style={{opacity:"0.6"}}></div>
-                <div className="relative z-20 my-4 px-2 md:px-6">
-                    <div className="text-3xl md:text-5xl font-semibold mx-2 md:mx-8" style={{letterSpacing:"-1px"}}>{Text[lang].Certificate}</div>
-                    <div className="font-medium mt-2 mx-2 md:mx-16 text-base md:text-2xl semi-bold">{Text[lang].Certificate_desc}</div>
-                    <div className="relative flex flex-col md:flex-row items-center gap-4 md:gap-0 mt-6 px-2 md:px-6">
-                        <div className="py-3 px-6 bg-green-300 rounded-xl w-full md:w-auto text-center" onClick={()=>props.setY((props.Y-1+n)%n)}>Previous</div>
-                        <Cert_card Y={props.Y} setY={props.setY}></Cert_card>
-                        <div className="py-3 px-6 bg-green-300 rounded-xl w-full md:w-auto text-center" onClick={()=>props.setY((props.Y+1)%n)}>Next</div>
-                    </div>
+        <div className={` grid ` } style={{width:"100%", height:"100%", pointerEvents:zoomedin?"auto":"none", backgroundColor:"rgb(14,176,176)"}}>
+                <div className="mx-4 my-4 flex ">
+                <Cert_icon cert={CertsData[0]}></Cert_icon>
+                <Cert_icon cert={CertsData[1]}></Cert_icon>
                 </div>
 
-              
+                
+                <div className="text-xl z-50 border cursor-pointer bg-red-200 rounded-xl w-32 h-16 flex justify-center items-center absolute" style={{bottom:"60px", right:"60px"}}
+                onClick={()=>{
+                    if(cameraBusy.current==false)return;
+                    animateCamera(camera,{pos:{x:positionofxz,y:5,z:positionofxz}, target:{x:positionofxz-4,y:3.5,z:positionofxz-4}},cameraBusy,zoomedin)
+                    setZoomedin(false)
+                }}> Back </div>
+
+                <div className="absolute bottom-0 h-10 w-full border-4 border-white" style={{backgroundColor:"rgb(224,224,224)"}}> </div>
+                
 
 
-            </div>
-
+            
+           
         </div>
 
     )

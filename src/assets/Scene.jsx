@@ -13,7 +13,7 @@ import VolumetricLights from "./VolumetricLights";
 
 
 
-export default function Scene({positionofxz}) {
+export default function Scene({positionofxz,setpositionofxz,cameraBusy,focusObject, setFocusObject, activeDiv, zoomedin, setZoomedin,tutorial,setTutorial}) {
   
   const orbRefs= useRef(null)
   
@@ -105,7 +105,7 @@ export default function Scene({positionofxz}) {
 
     
 
-    <Object positionofxz={positionofxz}></Object>
+    <Object positionofxz={positionofxz} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy}focusObject={focusObject} setFocusObject={setFocusObject} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin} tutorial={tutorial} setTutorial={setTutorial}></Object>
 
     <VolumetricLights positionofxz={positionofxz}></VolumetricLights>
 

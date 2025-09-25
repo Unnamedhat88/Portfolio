@@ -1,77 +1,110 @@
 import Text from "./Text.json"
-export function Projects(props){
+import { useState } from "react"
+export function Projects({animateCamera,cameraBusy,originalCameraPosition,originalLookAt,camera, positionofxz,zoomedin,setZoomedin}){
     const lang="English"
     const n=2
+    const [informationIndex, setInformationIndex]=useState(0)
     
     const ProjectsData=[
         {title:"Pollen Mapping System", 
-            desc:`My team made a full stack website to display pollenous flowers on a map, 
-                this project aims to help people with pollen allergies by showing highly 
-                pollenous areas. The full stack was built using React for the front end, Python Flask for the backend, and SQLAlchemy 
-                for the database. We also implemented a model to classify the flower with a 0.86 accuracy`
+            desc:`Web app prototype showing pollen spread map
+                - Built REST APIs in Flask and integrated a pre-trained ML model for real-time predictions
+                - Tested locally with 50 simulated requests, achieving ~0.2s per request and 100% succes rate \n
+                Technology used : Keras, Python, React, Flask, SQLAlchemy, Tailwind CSS`
             , img:"/images/proj1.webp"
-            , tech:"Technology used : Keras, Python, React, Flask, SQLAlchemy, Tailwind CSS"
-            ,prototypeLink:"NA"
-            , GithubLink:"NA"},
+            ,prototypeLink:"NA",
+        
+            Sprite:"jasminetea.svg"},
 
          {title:"3D Portfolio website",
-         desc: `I created a portfolio website that has all my introductions, projects, certificates, and ways
-        to contact me. I achieved this by using R3F (React three fiber) for the 3D background and React. I also
-        learned GLSL for the water caustic. For the model, I created it in Blender.`
+         desc: `- Engineered an interactive underwater environment with React Three Fiber and custom GLSL shaders for underwater effects
+                - Deployed globally on AWS (S3+CloudFront+Route53), enabling fast access from any region, ~200ms TTFB in Asia/North America (measured via catchpoint) 
+                - Inspired by Jesse Zhou's innovative 3D interactive shop [https://www.jesse-zhou.com/] \n
+                Technology used : React, R3F, GLSL, Blender, Tailwind CSS, AWS`
          , img:"/images/proj2.webp"
-         , tech:"Technology used : React, R3F, GLSL, Blender, Tailwind CSS"
-         ,prototypeLink:"NA"
-         , GithubLink:"NA"},
+         ,prototypeLink:"NA",
+    
+        Sprite:"portfolio.svg"},
+
+        {title:"Logic Gate Simulation", 
+            desc:`- Built a Logic gate simulator with typescript
+                \n
+                Technology used : React, Tailwind CSS, Typescript`
+            , img:"/images/proj3.webp"
+            ,prototypeLink:"NA",
+         
+            Sprite:"cicada.svg"},
+
+         {title:"SOLD OUT", 
+            desc:`coming soon`
+            , img:"TBA"
+            , tech:"TBA"
+            ,prototypeLink:"NA",
+       
+            Sprite:"soldout.svg"},
+
 
     ]
-    const Project_card = (props) =>{
+    const Project_card = ({ProjectsData,index}) =>{
         return(
-        <div className="grid my-4 bg-red-100 rounded-xl mx-4 sm:mx-6 md:mx-10 lg:mx-20" style={{marginInline:"20px",height: '550px' }}>
-            <div className="flex flex-col md:flex-row py-6 px-6 md:px-10 gap-6 md:gap-10">
-            <img src={ProjectsData[props.X].img} className="object-cover w-full md:w-[500px] h-[250px] md:h-[350px]" style={{width:"500px", height:"350px"}}></img>
-                <div className=" ml-5 flex-1 flex flex-col justify-between ">
-                    <div>
-                        <p className="text-3xl md:text-5xl font-bold mb-4">{ProjectsData[props.X].title}</p>
-                        <p className="text-sm md:text-sm mb-4">{ProjectsData[props.X].desc}</p>
-                        <p className="text-base md:text-xl font-medium">{ProjectsData[props.X].tech}</p>
-                    </div >
-                        <div className="flex justify-between  mt-8 mx-4 md:mx-16">
-                        <div className={`bg-yellow-300 px-5 py-4 text-lg rounded-xl ${(ProjectsData[props.X].prototypeLink=="NA")?"invisible":""}`}>Visit prototype</div>
-                        <div className={`bg-gray-300 px-5 py-4 text-lg rounded-xl ${(ProjectsData[props.X].prototypeLink=="NA")?"invisible":""}`}>View on Github</div>
-                    </div>
-                    <div className="mt-6 flex gap-3 justify-center md:justify-start">
-                        {ProjectsData.map((_roots,index)=>(
-                             <div key={index} className={` rounded-full ${index==props.X?"bg-yellow-600":"bg-gray-400 "}`} style={{height:"20px",width:"20px"}}></div>   
-                        ))}
-                       
-                    </div>
-                </div>
-               
+        <div className="z-50 mt-8 border-4 rounded-xl justify-items-center shadow-lg cursor-pointer" style={{width:"160px", height:"350px", backgroundColor:"rgba(212, 227, 255, 1)"}} onClick={()=>{setInformationIndex(index+1)}}>
+            <div className=" mt-2 justify-items-center" style={{width:"130px", height:"240px"}}>
+                <img className="object-contain" style={{height:"250px"}} src={`/images/drinks/${ProjectsData[index].Sprite}`}></img>
             </div>
+            <div className="mt-4 text-center font-semibold text-xl">{ProjectsData[index].title}</div>
+           
             
             
-        </div>)
+            
+        </div>
+        )
     }
 
     
-    return (
-         <div className={`h-screen grid ${props.className}`} style={props.style}>
-             <div className="relative mx-4 md:mx-16 my-10">
-                <div className="absolute h-full w-full bg-red-100 rounded-xl" style={{opacity:"0.6"}}></div>
-                <div className="relative z-20 my-4 px-2 md:px-6">
-                    <div className="text-3xl md:text-5xl font-semibold mx-2 md:mx-8" style={{fontWeight:"600",letterSpacing:"-1px"}}>{Text[lang].Projects}</div>
-                    <div className="font-medium mt-2 mx-2 md:mx-16 text-base md:text-2xl semi-bold">{Text[lang].Project_desc}</div>
-                    <div className="relative flex flex-col md:flex-row items-center gap-4 md:gap-0 mt-6 px-2 md:px-6">
-                        <div className=" py-3 px-6 bg-green-300 rounded-xl w-full md:w-auto text-center" onClick={()=>props.setX((props.X-1+n)%n)}>Previous</div>
-                        <Project_card X={props.X} setX={props.setX}></Project_card>
-                        <div className="py-3 px-6 bg-green-300 rounded-xl w-full md:w-auto text-center" onClick={()=>props.setX((props.X+1)%n)}>Next</div>
-                    </div>
-                </div>
-
-
-            </div>
-
+    return (<>
+         {(informationIndex<1)&&<><div className="grid grid-cols-3 w-full h-full justify-items-center "style={{pointerEvents:zoomedin?"auto":"none", backgroundColor:"rgba(176, 204, 255, 1)"}}>
+            
+            <Project_card ProjectsData={ProjectsData} index={0}></Project_card>
+            <Project_card ProjectsData={ProjectsData} index={1}></Project_card>
+            <Project_card ProjectsData={ProjectsData} index={2}></Project_card>
+            <Project_card ProjectsData={ProjectsData} index={3}></Project_card>
+            <Project_card ProjectsData={ProjectsData} index={3}></Project_card>
         </div>
+        <div className="text-xl z-50 border cursor-pointer bg-red-200 rounded-xl w-32 h-16 flex justify-center items-center absolute" style={{bottom:"60px", right:"60px"}}
+                onClick={()=>{
+                    if(cameraBusy.current==false)return;
+                    animateCamera(camera,{pos:{x:positionofxz,y:5,z:positionofxz}, target:{x:positionofxz-4,y:3.5,z:positionofxz-4}},cameraBusy,zoomedin)
+                    setZoomedin(false)
+                }}> Back </div>
+            </>}
+        
+         {(informationIndex>=1)&&<>
+         <div className=" w-full h-full justify-items-center pt-4"style={{pointerEvents:zoomedin?"auto":"none", backgroundColor:"rgba(176, 204, 255, 1)"}}>
+            <div className="pt-2 px-2 rounded-xl bg-gray-200" style={{width:"540px", height:"350px"}}>
+                {(ProjectsData[informationIndex-1].img!="TBA")&&<img className="rounded-xl object-cover w-full h-full " src={ProjectsData[informationIndex-1].img} style={{height:"330px"}}></img>}
+                {(ProjectsData[informationIndex-1].img=="TBA")&&<div className="rounded-xl object-cover w-full h-full flex items-center justify-center"  style={{height:"330px",fontSize:"25px"}}>Work In Progress</div>}
+            </div>
+            <div className="bg px-2 bg-blue-200 rounded-xl mt-4 py-4 px-4" style={{width:"540px", height:"440px", fontSize:"23px", whiteSpace:"pre-line"}}>
+                {ProjectsData[informationIndex-1].desc}
+            </div>
+            <div className="bg px-2 rounded-xl mt-4 justify-center flex items-center gap-12" style={{width:"540px", height:"80px"}}>
+                {(ProjectsData[informationIndex-1].prototypeLink!="NA")&&<div className="bg-green-200 rounded-xl font-semibold flex items-center justify-center px-6 cursor-pointer text-center" style={{width:"190px", height:"75px",fontSize:"22px"}}>
+                    Navigate to <br/>website
+                </div>}
+                {(ProjectsData[informationIndex-1].prototypeLink=="NA")&&<div className="bg-gray-200 rounded-xl font-semibold flex items-center justify-center px-6 text-center" style={{width:"190px", height:"75px",fontSize:"22px"}}>
+                    Currently unavailable
+                </div>}
+                <div className="bg-red-200 rounded-xl font-semibold flex items-center justify-center px-6 cursor-pointer text-center" style={{width:"190px", height:"75px",fontSize:"22px"}} onClick={()=>{setInformationIndex(0)}}>
+                    Go Back
+                </div>
+            </div>
+            
+            
+            
+           
+        </div>
+       </>}
+        </>
 
     )
 }
