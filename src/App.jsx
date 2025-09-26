@@ -158,7 +158,7 @@ function App() {
      <div style={{opacity:(activeDiv==3&&!tutorial[3])?1:0, marginTop:"-100px", textAlign:"left", marginLeft:"15vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the phone to<br/> contact me</div>
     </div>
    
-    <Canvas className="" style={{height:"100vh", position:"fixed", background:"#e187c0", touchAction:"pan-y"}}
+    <Canvas className="" dpr={[1,2]} style={{height:"100vh", position:"fixed", background:"#e187c0", touchAction:"pan-y"}}
     shadows>
       <CameraAdjust scrollProgress={scrollprogress} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy}  zoomedin={zoomedin} setZoomedin={setZoomedin}></CameraAdjust>
       <Scene positionofxz={positionofxz} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy} focusObject={focusObject} setFocusObject={setFocusObject} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin} tutorial={tutorial} setTutorial={setTutorial}/>

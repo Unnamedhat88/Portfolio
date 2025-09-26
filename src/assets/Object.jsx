@@ -107,9 +107,10 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
      
         if(child.isMesh){
           child.userData.onClick=()=>{
-            cameraBusy.current=true;
-            setZoomedin(true)
+          
             if(child.parent.name.toLocaleLowerCase()=="tvbody001"||child.name.toLocaleLowerCase()=="tvscreen001"){
+              cameraBusy.current=true;
+              setZoomedin(true)
               animateCamera(camera, {pos : {x: 2.3310/2, y: 3.388/2, z: 17.349/2},target:{x: -3.879/2, y: 3.388/2, z: 15.40533/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
@@ -118,6 +119,8 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               })
             }
             else if(child.parent.name.toLocaleLowerCase()=="vendingbody"||child.name.toLocaleLowerCase()=="vendingscreen"){
+              cameraBusy.current=true;
+              setZoomedin(true)
               animateCamera(camera, {pos : {x:-16.676/2, y:10.641/2, z:-19.908/2},target:{x: -21.514/2,y:10.641/2,z:-25.978/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
@@ -126,6 +129,8 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               })
             }
             else if(child.parent.name.toLocaleLowerCase()=="laptopbody"||child.name.toLocaleLowerCase()=="laptopscreen"){
+              cameraBusy.current=true;
+              setZoomedin(true)
               animateCamera(camera, {pos : {x:-63.8099/2, y:9.940/2,  z:-48.985/2},target:{x:-68.707/2,y:9.240/2,z:-50.891/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
@@ -134,6 +139,8 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               })
             }
             else if(child.parent.name.toLocaleLowerCase()=="phonebody"||child.name.toLocaleLowerCase()=="phonescreen"){
+              cameraBusy.current=true;
+              setZoomedin(true)
               animateCamera(camera, {pos : {x:-83.1390/2, y: 4.025/2, z:-84.188/2},target:{x:-84.834/2, y:3.85/2, z:-86.583/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
