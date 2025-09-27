@@ -10,7 +10,6 @@ import * as THREE from 'three'
 import { Contact } from './assets/Contact'
 import gsap from 'gsap'
 import { Toolbar } from './assets/Toolbar'
-import { gapSize } from 'three/tsl'
 
 function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZoomedin}){
 
@@ -51,21 +50,12 @@ function App() {
   //for handling device resize
   useEffect(()=>{
     const handleResize = () =>{
-      camera.aspect=size.width/ size.height;
-      if(size.width<600){
-        camera.fov=60;
-      }
-      else{
-        camera.fov=45;
-      }
-      camera.updateProjectionMatrix()
       setViewportHeight(window.innerHeight)
     }
 
-    handleResize();
     window.addEventListener("resize",handleResize);
     return ()=> window.removeEventListener("resize", handleResize);
-  },[camera,size]);
+  },[]);
 
 
   const scrollprogress=useRef({value: 0})
