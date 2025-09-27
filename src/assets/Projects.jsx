@@ -48,7 +48,7 @@ export function Projects({animateCamera,cameraBusy,originalCameraPosition,origin
     const Project_card = ({ProjectsData,index}) =>{
         return(
         <div className="z-50 mt-8 border-4 rounded-xl justify-items-center shadow-lg cursor-pointer" style={{width:"160px", height:"350px", backgroundColor:"rgba(212, 227, 255, 1)"}} onClick={()=>{setInformationIndex(index+1)}}>
-            <div className=" mt-2 justify-items-center" style={{width:"130px", height:"240px"}}>
+            <div className=" mt-2 grid place-items-center" style={{width:"130px", height:"240px"}}>
                 <img className="object-contain" style={{height:"250px"}} src={`/images/drinks/${ProjectsData[index].Sprite}`}></img>
             </div>
             <div className="mt-4 text-center font-semibold text-xl">{ProjectsData[index].title}</div>
