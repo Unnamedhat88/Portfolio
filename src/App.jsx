@@ -19,7 +19,8 @@ function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZ
   useEffect(()=>{
     window.scrollTo(0,0)
   },[])
-  if(window.innerWidth<=768){
+  const isMobile= /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+  if(isMobile){
     camera.fov=100;
   }
   camera.updateProjectionMatrix();
@@ -46,7 +47,8 @@ function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZ
 function App() {
   const [warning, setWarning]=useState(false)
   useEffect(()=>{
-    if(window.innerHeight<=768){
+    const isMobile= /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+    if(isMobile){
       setWarning(true);
     }
   },[])
