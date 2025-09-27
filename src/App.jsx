@@ -156,7 +156,7 @@ function App() {
   return (<>
   
     <div className="relative bg-red-300" >
-    <Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin}></Toolbar>
+    {!zoomedin&&<Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin}></Toolbar>}
     
     <div className="grid absolute z-10 inset-0">
       <div style={{opacity:(activeDiv==0&&!tutorial[0])?1:0, marginTop:"120px", textAlign:"right", marginRight:"20vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the TV to see my profile</div>
