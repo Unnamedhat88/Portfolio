@@ -31,7 +31,7 @@ export function Certs({animateCamera,cameraBusy,originalCameraPosition,originalL
 
     
     return (
-        <div className={` grid ` } style={{width:"100%", height:"100%", pointerEvents:zoomedin?"auto":"none", backgroundColor:"rgb(14,176,176)"}}>
+        <div className={` grid ` } style={{width:"100%", height:"100%", pointerEvents:zoomedin?"auto":"auto", backgroundColor:"rgb(14,176,176)"}}>
                 <div className="mx-4 my-4 flex ">
                 <Cert_icon cert={CertsData[0]}></Cert_icon>
                 <Cert_icon cert={CertsData[1]}></Cert_icon>
