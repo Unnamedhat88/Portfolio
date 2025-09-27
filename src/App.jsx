@@ -18,6 +18,11 @@ function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZ
   useEffect(()=>{
     window.scrollTo(0,0)
   },[])
+  if(window.innerWidth<=768){
+    camera.fov=100;
+  }
+  camera.updateProjectionMatrix();
+  
 
   useFrame(()=>{
     if(cameraBusy.current) return;

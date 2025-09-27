@@ -19,7 +19,7 @@ export function Certs({animateCamera,cameraBusy,originalCameraPosition,originalL
     ]
     const Cert_icon = ({cert}) =>{
         return(<>
-        <div className="flex flex-col items-center cursor-pointer grid mx-5 " style={{width:"160px", height:"220px"}} onClick={()=>window.open(`${cert.link}`,"_blank")}>
+        <div className="z-50 flex flex-col items-center cursor-pointer grid mx-5 " style={{width:"160px", height:"220px"}} onClick={()=>window.open(`${cert.link}`,"_blank")}>
             <img className="w-full h-auto " src={cert.img}></img>
             <p className="text-xl mt-2 flex justify-center font-300 text-center text-white">{cert.title}</p>
         </div>

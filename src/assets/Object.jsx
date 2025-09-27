@@ -112,7 +112,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               if(currActiveDiv!=0)return;
               cameraBusy.current=true;
               setZoomedin(true)
-              animateCamera(camera, {pos : {x:( 2.3310+12.1043)/2, y: 3.388/2, z: (17.349-4.128)/2},target:{x: (-3.879+12.1043)/2, y: 3.388/2, z: (15.40533-4.128)/2}}, positionofxz )
+              animateCamera(camera, {pos : {x:( 13.182)/2, y: 3.388/2, z: (12.800)/2},target:{x: (-3.879+12.1043)/2, y: 3.388/2, z: (15.40533-4.128)/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
                 newTutorial[0]=1;
@@ -134,7 +134,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               if(currActiveDiv!=2)return;
               cameraBusy.current=true;
               setZoomedin(true)
-              animateCamera(camera, {pos : {x:-55.656/2, y:9.940/2,  z:-53.7/2},target:{x:(-68.707+5.597)/2,y:9.240/2,z:(-50.891-5.706)/2}}, positionofxz )
+              animateCamera(camera, {pos : {x:-57.656/2, y:9.940/2,  z:-54.5/2},target:{x:(-68.707+5.597)/2,y:9.240/2,z:(-50.891-5.706)/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
                 newTutorial[2]=1;
@@ -252,13 +252,13 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
 
       
       {/* for laptop */}
-      old -68.604, 9.075, -51.037
-      new -63.007, 9.075, -56.743
+      {/* old -68.604, 9.075, -51.037
+      new -63.007, 9.075, -56.743 */}
       <group  position={[-62.901+0.106, 9.075, -56.713+0.030]} rotation={[1.508+0.035, 0.163-0.088, -1.199-0.001]} scale={[3.413+0.05, 0.085+0.05, 2.526+0.05]}>
        
       
         {(zoomedin&&activeDiv==2)&&<Html style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0}} distanceFactor={1} transform position={[0.002,-2,-0.04]} scale={[1,1.31,1]} rotation={[(Math.PI)/2,-Math.PI,-Math.PI]}>
-          <div style={{width:size2.x*170, height:size2.y*40}} className="">
+          <div style={{width:size2.x*172, height:size2.y*40}} className="">
             <Certs animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Certs>
           </div>
           
