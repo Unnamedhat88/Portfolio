@@ -228,7 +228,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       }}>
       {/* for TV */}
       <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={[0.959, 0.834, 0.959]} >
-        {(zoomedin&&activeDiv==0)&&<Html distanceFactor={!isMobile?1.0:1.1} transform center position={!isMobile?[-0.8,-3.5,2.29]:[-0.1,-4.1,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
+        {(zoomedin&&activeDiv==0)&&<Html distanceFactor={!isMobile?1.0:1.1} transform center position={isMobile?[-0.8,-3.5,2.29]:[-0.9,-3.5,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
           <div style={{width:"860px", height:"670px"}} className=" bg-red-100">
             <Summary animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin} zoomedin={zoomedin}></Summary>
           </div>
@@ -240,7 +240,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
      
       <group position={[-33.589, 5.86, -41.283]} rotation={[0, 0.095, 0]} scale={[1.23, 0.76, 1.23]}>
         
-          {(zoomedin&&activeDiv==1)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==1?1:0}} distanceFactor={!isMobile?1.0:1.1} transform position={[8.57,6.4,13.4]} scale={[4,6.3,4]} rotation={[0,0.577,0]}>
+          {(zoomedin&&activeDiv==1)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==1?1:0}} distanceFactor={1} transform position={[8.57,6.4,13.4]} scale={[4,6.3,4]} rotation={[0,0.577,0]}>
           <div style={{width:size3.x*300, height:size3.y*170}} className="">
               <Projects animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Projects>
           </div>
