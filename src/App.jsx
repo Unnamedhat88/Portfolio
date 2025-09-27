@@ -45,6 +45,8 @@ function App() {
   const cameraBusy=useRef(false)
   const [viewportHeight, setViewportHeight]=useState(window.innerHeight);
 
+  
+
   //for handling device resize
   useEffect(()=>{
     const handleResize = () =>{
@@ -80,7 +82,7 @@ function App() {
         target =scrollprogress.current.value+0.33
         setActiveDiv(prev=> { 
           const newval=Math.min(3,prev+1);
-          console.log(newval);
+       
           window.scrollTo({top:viewportHeight*newval, behavior:"smooth" })
           return newval
         })
@@ -91,7 +93,7 @@ function App() {
         target =scrollprogress.current.value-0.33
         setActiveDiv(prev=> { 
           const newval=Math.max(0,prev-1);
-          console.log(newval);
+          
           window.scrollTo({top:viewportHeight*newval, behavior:"smooth" })
           return newval
         })

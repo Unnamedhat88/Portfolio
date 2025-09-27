@@ -40,14 +40,25 @@ export function Contact({animateCamera,cameraBusy,originalCameraPosition,origina
                                 <p className="text-3xl">{item.title}</p>
                              </div>   
                         ))}
-                        <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4 border-4 border-black bg-blue-100" style={{height:"90px",width:"320px"}}>
+                        <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4 border-4 border-black bg-blue-100" style={{height:"90px",width:"320px"}}
+                        onClick={()=>{
+                            const link=document.createElement("a");
+                            link.href="/Brandon_Kwee_Resume.pdf";
+                            link.download="Brandon_Kwee_Resume.pdf";
+                            link.click()
+                        }}>
                              
                                 <p className="text-2xl">Download Resume (English)</p>
                              </div>   
-                        <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4 border-4 border-black bg-blue-100" style={{height:"90px",width:"320px"}}>
+                        <div className="rounded-xl cursor-pointer bg-red-100 flex items-center justify-center py-4 border-4 border-black bg-blue-100" style={{height:"90px",width:"320px"}}
+                         onClick={()=>{
+                            const link=document.createElement("a");
+                            link.href="/BrandonPratama_履歴書.pdf";
+                            link.download="BrandonPratama_履歴書.pdf";
+                            link.click()
+                        }}>
                              
-                                <p className="text-2xl">Download Resume (日本語)
-                                </p>
+                                <p className="text-2xl">Download Resume (日本語)</p>
                              </div>   
                         
                     </div>
