@@ -179,7 +179,7 @@ function App() {
     shadows>
       <CameraAdjust scrollProgress={scrollprogress} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy}  zoomedin={zoomedin} setZoomedin={setZoomedin}></CameraAdjust>
       <Scene positionofxz={positionofxz} setpositionofxz={setpositionofxz} cameraBusy={cameraBusy} focusObject={focusObject} setFocusObject={setFocusObject} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin} tutorial={tutorial} setTutorial={setTutorial}/>
-      {/* <OrbitControls></OrbitControls> */}
+      <OrbitControls></OrbitControls>
     </Canvas>
     
     </div>

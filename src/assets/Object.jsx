@@ -257,8 +257,8 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       new -63.007, 9.075, -56.743 */}
       <group  position={[-62.901+0.106, 9.075, -56.713+0.030]} rotation={[1.508+0.035, 0.163-0.088, -1.199-0.001]} scale={[3.413+0.05, 0.085+0.05, 2.526+0.05]}>
        
-        {(zoomedin&&activeDiv==2)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0}} distanceFactor={!isMobile?1.0:1.2} transform position={[0.002,-2,-0.04]} scale={[1,1.31,1]} rotation={[-(Math.PI)/2,0,0]}>
-          <div style={{width:size2.x*172, height:size2.y*40}} className="">
+        {(zoomedin&&activeDiv==2)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0, pointerEvents:"auto"}} distanceFactor={!isMobile?1.0:1.2} transform position={[0.002,0.1,-0.04]} scale={[1,1.31,1]} rotation={[-(Math.PI)/2,0,0]}>
+          <div style={{width:size2.x*172, height:size2.y*40,pointerEvents:"auto"}} className="">
             <Certs animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Certs>
           </div>
           
