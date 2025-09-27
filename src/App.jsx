@@ -10,7 +10,8 @@ import * as THREE from 'three'
 import { Contact } from './assets/Contact'
 import gsap from 'gsap'
 import { Toolbar } from './assets/Toolbar'
-
+import {Warning} from './assets/Warning'
+ 
 function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZoomedin}){
 
   const {camera} = useThree()
@@ -43,6 +44,12 @@ function CameraAdjust({scrollProgress,setpositionofxz, cameraBusy, zoomedin,setZ
 }
 
 function App() {
+  const [warning, setWarning]=useState(false)
+  useEffect(()=>{
+    if(window.innerHeight<=768){
+      setWarning(true);
+    }
+  })
   const [tutorial,setTutorial]=useState([1,1,1,1])
   const [zoomedin,setZoomedin]=useState(false);
   
@@ -154,9 +161,12 @@ function App() {
 },[zoomedin]);
 
   return (<>
+
+    
   
-    <div className="relative bg-red-300" >
+    <div className="relative" >
     {!zoomedin&&<Toolbar viewportHeight={viewportHeight} setActiveDiv={setActiveDiv} scrollprogress={scrollprogress} activeDiv={activeDiv} zoomedin={zoomedin} setZoomedin={setZoomedin}></Toolbar>}
+    {warning&&<Warning setWarning={setWarning}></Warning>}
     
     <div className="grid absolute z-10 inset-0">
       <div style={{opacity:(activeDiv==0&&!tutorial[0])?1:0, marginTop:"120px", textAlign:"right", marginRight:"20vw", fontSize:"40px"}} className="transition-opacity duration-100 font-semibold pointer-events-none">Press the TV to see my profile</div>
