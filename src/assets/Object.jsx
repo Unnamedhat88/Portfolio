@@ -134,7 +134,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               if(currActiveDiv!=2)return;
               cameraBusy.current=true;
               setZoomedin(true)
-              animateCamera(camera, {pos : {x:(-63.8099+5.597)/2, y:9.940/2,  z:(-48.985-5.706)/2},target:{x:(-68.707+5.597)/2,y:9.240/2,z:(-50.891-5.706)/2}}, positionofxz )
+              animateCamera(camera, {pos : {x:-55.656/2, y:9.940/2,  z:-53.7/2},target:{x:(-68.707+5.597)/2,y:9.240/2,z:(-50.891-5.706)/2}}, positionofxz )
               setTutorial(prev=>{
                 const newTutorial=[...prev]
                 newTutorial[2]=1;
