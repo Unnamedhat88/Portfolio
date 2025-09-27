@@ -227,8 +227,8 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       
       }}>
       {/* for TV */}
-      <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={!isMobile?[0.959, 0.834, 0.959]:[0.999, 0.834, 0.959]} >
-        {(zoomedin&&activeDiv==0)&&<Html distanceFactor={!isMobile?1.0:1.0} transform center position={isMobile?[-0.8,-3.45,2.29]:[-0.9,-3.5,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
+      <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={!isMobile?[0.959, 0.834, 0.959]:[1.01, 0.874, 0.959]} >
+        {(zoomedin&&activeDiv==0)&&<Html distanceFactor={!isMobile?1.0:1.0} transform center position={isMobile?[-0.9,-3.4,2.29]:[-0.9,-3.5,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
           <div style={{width:"860px", height:"670px"}} className=" bg-red-100">
             <Summary animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin} zoomedin={zoomedin}></Summary>
           </div>
