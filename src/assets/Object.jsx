@@ -48,7 +48,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
     const gltf = useLoader(GLTFLoader, 'images/models/environment.glb')
     const { nodes, materials } = useGLTF('images/models/environment.glb')
 
-    const isMobile = window.innerHeight<=768;
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
     
     useEffect(()=>{
       if(gltf && gltf.scene) setTutorial(prev=>[0,0,0,0])
