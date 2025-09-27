@@ -61,6 +61,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
     const size=new THREE.Vector3()
     nodes.tvscreen001.geometry.computeBoundingBox()
     nodes.tvscreen001.geometry.boundingBox.getSize(size)
+    console.log(size)
 
     const size2=new THREE.Vector3()
     nodes.vendingscreen.geometry.computeBoundingBox()
@@ -224,11 +225,9 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       
       }}>
       {/* for TV */}
-      {/* new 6.1243, 6.309, 10.135 */}
-      {/* old -5.98, 6.309, 14.263 */}
       <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={[0.959, 0.834, 0.959]} >
         {(zoomedin&&activeDiv==0)&&<Html distanceFactor={window.innerHeight<=768?1.1:1} transform center position={[-0.8,-3.5,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
-          <div style={{width:size.x*134, height:size.y*116}} className=" bg-red-100">
+          <div style={{width:"860px", height:"670px"}} className=" bg-red-100">
             <Summary animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin} zoomedin={zoomedin}></Summary>
           </div>
         </Html> }
@@ -255,12 +254,9 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       {/* old -68.604, 9.075, -51.037
       new -63.007, 9.075, -56.743 */}
       <group  position={[-62.901+0.106, 9.075, -56.713+0.030]} rotation={[1.508+0.035, 0.163-0.088, -1.199-0.001]} scale={[3.413+0.05, 0.085+0.05, 2.526+0.05]}>
-       
-      
         {(zoomedin&&activeDiv==2)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0}} distanceFactor={window.innerHeight<=768?1.1:1} transform position={[0.002,-2,-0.04]} scale={[1,1.31,1]} rotation={[(Math.PI)/2,-Math.PI,-Math.PI]}>
           <div style={{width:size2.x*172, height:size2.y*40}} className="">
-            {/* <Certs animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Certs> */}
-            <Summary animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin} zoomedin={zoomedin}></Summary>
+            <Certs animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Certs>
           </div>
           
           
