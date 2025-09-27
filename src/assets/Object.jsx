@@ -227,7 +227,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       
       }}>
       {/* for TV */}
-      <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={!isMobile?[1.01, 0.834, 0.959]:[1.01, 0.874, 0.959]} >
+      <group position={[6.1243, 6.309, 10.135]} rotation={[0, 1.27, 0]} scale={!isMobile?[1.01, 0.834, 0.959]:[1.01, 0.894, 0.959]} >
         {(zoomedin&&activeDiv==0)&&<Html distanceFactor={!isMobile?1.0:1.0} transform center position={isMobile?[-0.98,-3.39,2.29]:[-0.9,-3.5,2.29]} scale={[3,3.4,3]} style={{transition:"opacity 200ms",opacity:(zoomedin&&activeDiv==0)?"1":"0" }} >
           <div style={{width:"860px", height:"670px"}} className=" bg-red-100">
             <Summary animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin} zoomedin={zoomedin}></Summary>
@@ -257,7 +257,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
       new -63.007, 9.075, -56.743 */}
       <group  position={[-62.901+0.206, 9.075, -56.713+0.10]} rotation={[1.508+0.035, 0.163-0.088, -1.199-0.001]} scale={[3.413+0.05, 1.0, 2.526+0.05]}>
        
-        {(zoomedin&&activeDiv==2)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0, pointerEvents:"auto"}} distanceFactor={!isMobile?1.0:1.0} transform position={isMobile?[-0.065,0,-0.04]:[0.002,0,-0.04]} scale={[1.15,1.51,1.15]} rotation={[-(Math.PI)/2,0,0]}>
+        {(zoomedin&&activeDiv==2)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==2?1:0, pointerEvents:"auto"}} distanceFactor={!isMobile?1.01:1.0} transform position={isMobile?[-0.065,0,-0.04]:[0.002,0,-0.04]} scale={[1.15,1.51,1.15]} rotation={[-(Math.PI)/2,0,0]}>
           <div style={{width:size2.x*140, height:size2.y*33,pointerEvents:"auto"}} className="">
             <Certs animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Certs>
           </div>
@@ -271,7 +271,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
     {/* for phone */}
     <group position={[-88.15, 5.86, -90.755]} scale={[1.866, 1.153, 1.866]} >
      
-      {(zoomedin&&activeDiv==3)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==3?1:0}} distanceFactor={isMobile?1.01:1.0} transform position={isMobile?[1.73,-2.05,2.3]:[1.73,-1.76,2.2]} scale={[1.2,1.9,1.5]} rotation={[Math.PI-0.050,-Math.PI-0.61,-Math.PI+0.03]}>
+      {(zoomedin&&activeDiv==3)&&<Html center style={{ transition:"opacity 1.4s", opacity: activeDiv==3?1:0}} distanceFactor={isMobile?1.015:1.0} transform position={isMobile?[1.73,-2.05,2.285]:[1.73,-1.76,2.2]} scale={[1.2,1.9,1.5]} rotation={[Math.PI-0.050,-Math.PI-0.61,-Math.PI+0.03]}>
           <div style={{width:size3.x*193, height:size3.y*132}} className="">
             <Contact animateCamera={animateCamera} cameraBusy={cameraBusy} originalCameraPosition={originalCameraPosition} originalLookAt={originalLookAt} camera={camera} positionofxz={positionofxz} setZoomedin={setZoomedin}  zoomedin={zoomedin}></Contact>
           </div>
