@@ -49,7 +49,7 @@ function App() {
     if(window.innerHeight<=768){
       setWarning(true);
     }
-  })
+  },[])
   const [tutorial,setTutorial]=useState([1,1,1,1])
   const [zoomedin,setZoomedin]=useState(false);
   

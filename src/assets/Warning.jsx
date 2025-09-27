@@ -15,9 +15,9 @@ export function Warning({setWarning}) {
               
           `}
           </style>
-          <div className="fixed z-20 flex flex-col bg-green-400 flex toolbar justify-center items-center text-center" style={{width:"600px", height:"300px", top:"50%", left:"50%", transform:"translate(-50%,-50%)", fontSize:"24px"}}>
+          <div className="fixed z-20 flex flex-col bg-green-400 toolbar justify-center items-center text-center px-4 py-4" style={{width:"300px", height:"400px", top:"50%", left:"50%", transform:"translate(-50%,-50%)", fontSize:"23px"}}>
               <p className="mx-6 mt-2">This website works best on desktop / laptops. Some interaction may not be display correctly on mobile devices.</p>
-              <div className="mt-12 bg-red-100 rounded-xl px-4 py-4 border-black border-2 cursor-pointer" onClick={()=>setWarning(false)}>I understand and wish to proceed</div>
+              <div className="mt-12 bg-red-100 rounded-xl px-2 py-2 border-black border-2 cursor-pointer" onClick={()=>setWarning(false)}>I understand and wish to proceed</div>
           </div>
   </div>)
  
