@@ -142,7 +142,7 @@ export default function Object({positionofxz,setpositionofxz,cameraBusy,focusObj
               })
             }
             else if(child.parent.name.toLocaleLowerCase()=="phonebody"||child.name.toLocaleLowerCase()=="phonescreen"){
-              if(activeDiv!=3)return;
+              if(currActiveDiv!=3)return;
               cameraBusy.current=true;
               setZoomedin(true)
               animateCamera(camera, {pos : {x:-83.1390/2, y: 4.025/2, z:-84.188/2},target:{x:-84.834/2, y:3.85/2, z:-86.583/2}}, positionofxz )
